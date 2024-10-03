@@ -31,7 +31,7 @@
 
     // Game objects
     let replacementColor = CELL_COLORS.white;
-    let grids;
+    let grids = [];    // Maybe that it wasnt initialized as an array...?
     let playerScore = MAXIMUM_SCORE;
 
     // #endregion
@@ -108,7 +108,7 @@
       floodFill(
         newGrid,
         gridCoordinates,
-        newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row]
+        newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column]
       );
       grids.push(newGrid);
       render(grids[grids.length - 1]);
