@@ -31,7 +31,7 @@
 
     // Game objects
     let replacementColor = CELL_COLORS.white;
-    let grids = [];    // Maybe that it wasnt initialized as an array...?
+    let grids;    // Maybe that it wasnt initialized as an array...?
     let playerScore = MAXIMUM_SCORE;
 
     // #endregion
@@ -44,7 +44,8 @@
         startingGrid = initializeGrid();
       }
       initializeHistory(startingGrid);
-      render(grids[0]);
+      render(grids[0]); 
+      playerScore = MAXIMUM_SCORE;
     }
 
     function initializeGrid() {
@@ -171,6 +172,7 @@
 
     function restart() {
       startGame(grids[0]);
+
     }
 
     // #endregion
