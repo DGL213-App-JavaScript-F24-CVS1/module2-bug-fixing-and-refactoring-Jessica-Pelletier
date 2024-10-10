@@ -89,7 +89,9 @@ let currentPlayer = 'player1';
           Math.floor(i / CELLS_PER_AXIS) * CELL_HEIGHT,
           CELL_WIDTH,
           CELL_HEIGHT
+         
         );
+        
       }
 
       //USED CHAT GPT
@@ -118,15 +120,21 @@ let currentPlayer = 'player1';
       const newGrid = grids[grids.length - 1].slice();
 
       newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column] = PLAYER_COLORS[currentPlayer];
-
       grids.push(newGrid);
       render(grids[grids.length - 1]);
 
-
-
-      grids.push(newGrid);
-      render(grids[grids.length - 1]);
+      playersTurn();
+      
     }
+
+    const playerIndicator = document.querySelectorAll(".player");
+
+
+
+
+
+
+
 
     // function updatePlayerScore() {
     //   playerScore = playerScore > 0 ? (playerScore -= 1) : 0;
