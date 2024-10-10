@@ -198,10 +198,10 @@
       rollBackHistory();
     }
 
-    rotateButton.addEventListener("mousedown", rotateGrid);
-    function rotateGrid() {
-      transposeGrid();
-    }
+    // rotateButton.addEventListener("mousedown", rotateGrid);
+    // function rotateGrid() {
+    //   transposeGrid();
+    // }
 
     colorSelectButtons.forEach((button) => {
       button.addEventListener(
