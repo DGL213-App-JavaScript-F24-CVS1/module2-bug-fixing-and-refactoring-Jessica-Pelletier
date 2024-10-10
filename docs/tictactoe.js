@@ -127,9 +127,18 @@ let currentPlayer = 'player1';
       
     }
 
-    const playerIndicator = document.querySelectorAll(".player");
+    let playerIndicator = document.querySelector(".player");
 
+    function playersTurn(){
+      if (currentPlayer === 'player1') {
+        playerIndicator.textContent = "Player 2";
+        playerIndicator.style.color = 'green';
+      } else {
+        playerIndicator.textContent = 'Player 1';
+        playerIndicator.style.color = 'blue';
+      }
 
+    }
 
 
 
