@@ -133,11 +133,7 @@ let currentPlayer = 'player1';
     function updateGridAt(mousePositionX, mousePositionY) {
       const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY );
       const newGrid = grids[grids.length - 1].slice();
-      floodFill(
-        newGrid,
-        gridCoordinates,
-        newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column]
-      );
+
       grids.push(newGrid);
       render(grids[grids.length - 1]);
     }
