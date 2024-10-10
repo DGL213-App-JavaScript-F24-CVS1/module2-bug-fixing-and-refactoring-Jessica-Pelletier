@@ -24,6 +24,17 @@
       green: [0, 255, 0],
       blue: [0, 0, 255],
     };
+
+    /* Set the players colors */
+const PLAYER_COLORS ={
+  player1: CELL_COLORS.blue,
+  player2: CELL_COLORS.green
+};
+
+/*Game starts with the first player*/
+let currentPlayer = 'player1'; 
+
+
     const CELLS_PER_AXIS = 3;
     const CELL_WIDTH = canvas.width / CELLS_PER_AXIS;
     const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
@@ -120,10 +131,7 @@
     }
 
     function updateGridAt(mousePositionX, mousePositionY) {
-      const gridCoordinates = convertCartesiansToGrid(
-        mousePositionX,
-        mousePositionY
-      );
+      const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY );
       const newGrid = grids[grids.length - 1].slice();
       floodFill(
         newGrid,
@@ -134,9 +142,9 @@
       render(grids[grids.length - 1]);
     }
 
-    function updatePlayerScore() {
-      playerScore = playerScore > 0 ? (playerScore -= 1) : 0;
-    }
+    // function updatePlayerScore() {
+    //   playerScore = playerScore > 0 ? (playerScore -= 1) : 0;
+    // }
 
     function floodFill(grid, gridCoordinate, colorToChange) {
       if (arraysAreEqual(colorToChange, replacementColor)) {
@@ -200,9 +208,9 @@
 
     canvas.addEventListener("mousedown", gridClickHandler);
     function gridClickHandler(event) {
-      updatePlayerScore();
       updateGridAt(event.offsetX, event.offsetY);
-    }
+      currentPlayer = currentPlayer === 'player1' ? 'player2' : 'player1' ;
+        }
 
     restartButton.addEventListener("mousedown", restartClickHandler);
     function restartClickHandler() {
@@ -240,10 +248,10 @@
     }
 
     // To choose a random property from a given object
-    function chooseRandomPropertyFrom(object) {
-      const keys = Object.keys(object);
-      return object[keys[Math.floor(keys.length * Math.random())]]; //Truncates to integer
-    }
+    // function chooseRandomPropertyFrom(object) {
+    //   const keys = Object.keys(object);
+    //   return object[keys[Math.floor(keys.length * Math.random())]]; //Truncates to integer
+    // }
 
     // To compare two arrays
     function arraysAreEqual(arr1, arr2) {
