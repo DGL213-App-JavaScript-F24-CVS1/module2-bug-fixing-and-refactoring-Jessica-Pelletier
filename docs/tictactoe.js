@@ -13,8 +13,6 @@
     const restartButton = document.querySelector("#restart");
     const undoButton = document.querySelector("#undo");
 
-    const colorSelectButtons = document.querySelectorAll(".color-select");
-    const playerScoreText = document.querySelector("#score-text");
 
     // Constants
     const CELL_COLORS = {
@@ -38,12 +36,10 @@ let currentPlayer = 'player1';
     const CELLS_PER_AXIS = 3;
     const CELL_WIDTH = canvas.width / CELLS_PER_AXIS;
     const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
-    const MAXIMUM_SCORE = CELLS_PER_AXIS * CELLS_PER_AXIS;
+
 
     // Game objects
-    let replacementColor = CELL_COLORS.white;
     let grids;
-    let playerScore = MAXIMUM_SCORE;
 
     // #endregion
 
@@ -56,7 +52,7 @@ let currentPlayer = 'player1';
       }
       initializeHistory(startingGrid);
       render(grids[0]);
-      playerScore = MAXIMUM_SCORE;
+    
     }
 
     function initializeGrid() {
@@ -97,7 +93,7 @@ let currentPlayer = 'player1';
       //USED CHAT GPT
       // Draw the black grid lines
       ctx.strokeStyle = "black";
-      ctx.lineWidth = 2; // Adjust line width as needed
+      ctx.lineWidth = 2; 
       for (let i = 0; i <= CELLS_PER_AXIS; i++) {
         // Draw vertical lines
         ctx.beginPath();
@@ -112,7 +108,7 @@ let currentPlayer = 'player1';
         ctx.stroke();
       }
 
-      playerScoreText.textContent = playerScore;
+   
     }
 
     function updateGridAt(mousePositionX, mousePositionY) {
@@ -131,10 +127,10 @@ let currentPlayer = 'player1';
 
     function playersTurn(){
       if (currentPlayer === 'player1') {
-        playerIndicator.textContent = "Player 2";
+        playerIndicator.textContent = "Player Twos's Turn";
         playerIndicator.style.color = 'green';
       } else {
-        playerIndicator.textContent = 'Player 1';
+        playerIndicator.textContent = "Player One's Turn" ;
         playerIndicator.style.color = 'blue';
       }
 
@@ -145,30 +141,7 @@ let currentPlayer = 'player1';
 
 
 
-    // function updatePlayerScore() {
-    //   playerScore = playerScore > 0 ? (playerScore -= 1) : 0;
-    // }
-
-    function floodFill(grid, gridCoordinate, colorToChange) {
-      if (arraysAreEqual(colorToChange, replacementColor)) {
-        return;
-      } //The current cell is already the selected color
-      else if (
-        !arraysAreEqual(
-          grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column],
-          colorToChange
-        )
-      ) {
-        return;
-      } //The current cell is a different color than the initially clicked-on cell
-      else {
-        grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column] =
-          replacementColor;
-
-      }
-      return;
-    }
-
+    
     function restart() {
       startGame(grids[0]);
     }
@@ -194,15 +167,6 @@ let currentPlayer = 'player1';
       rollBackHistory();
     }
 
-
-
-    colorSelectButtons.forEach((button) => {
-      button.addEventListener(
-        "mousedown",
-        () => (replacementColor = CELL_COLORS[button.name])
-      );
-    });
-
     // #endregion
 
     // *****************************************************************************
@@ -217,19 +181,7 @@ let currentPlayer = 'player1';
     }
 
 
-    // To compare two arrays
-    function arraysAreEqual(arr1, arr2) {
-      if (arr1.length != arr2.length) {
-        return false;
-      } else {
-        for (let i = 0; i < arr1.length; i++) {
-          if (arr1[i] != arr2[i]) {
-            return false;
-          }
-        }
-        return true;
-      }
-    }
+
 
     // #endregion
 
