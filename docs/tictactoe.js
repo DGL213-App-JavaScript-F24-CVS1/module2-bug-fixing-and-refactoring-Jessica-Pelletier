@@ -31,7 +31,7 @@
 
     // Game objects
     let replacementColor = CELL_COLORS.white;
-    let grids; // Maybe that it wasnt initialized as an array...?
+    let grids; 
     let playerScore = MAXIMUM_SCORE;
 
     // #endregion
@@ -68,24 +68,24 @@
       }
     }
 
-    function transposeGrid() {
-      for (let i = 0; i < grids.length; i++) {
-        const currentGrid = grids[i];
-        for (let j = 0; j < currentGrid.length; j++) {
-          const currentGridRow = Math.floor(j / CELLS_PER_AXIS);
-          const currentGridColumn = j % CELLS_PER_AXIS;
-          if (currentGridColumn >= currentGridRow) {
-            const tempCellStorage = currentGrid[j];
-            currentGrid[j] =
-              currentGrid[currentGridColumn * CELLS_PER_AXIS + currentGridRow];
-            currentGrid[currentGridColumn * CELLS_PER_AXIS + currentGridRow] =
-              tempCellStorage;
-          }
-        }
-        grids[i] = currentGrid;
-      }
-      render(grids[grids.length - 1]);
-    }
+    // function transposeGrid() {
+    //   for (let i = 0; i < grids.length; i++) {
+    //     const currentGrid = grids[i];
+    //     for (let j = 0; j < currentGrid.length; j++) {
+    //       const currentGridRow = Math.floor(j / CELLS_PER_AXIS);
+    //       const currentGridColumn = j % CELLS_PER_AXIS;
+    //       if (currentGridColumn >= currentGridRow) {
+    //         const tempCellStorage = currentGrid[j];
+    //         currentGrid[j] =
+    //           currentGrid[currentGridColumn * CELLS_PER_AXIS + currentGridRow];
+    //         currentGrid[currentGridColumn * CELLS_PER_AXIS + currentGridRow] =
+    //           tempCellStorage;
+    //       }
+    //     }
+    //     grids[i] = currentGrid;
+    //   }
+    //   render(grids[grids.length - 1]);
+    // }
 
     function render(grid) {
       for (let i = 0; i < grid.length; i++) {
@@ -119,6 +119,9 @@
       playerScore = playerScore > 0 ? (playerScore -= 1) : 0;
     }
 
+
+
+
     function floodFill(grid, gridCoordinate, colorToChange) {
       if (arraysAreEqual(colorToChange, replacementColor)) {
         return;
@@ -134,38 +137,38 @@
       else {
         grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column] =
           replacementColor;
-        floodFill(
-          grid,
-          {
-            column: Math.max(gridCoordinate.column - 1, 0),
-            row: gridCoordinate.row,
-          },
-          colorToChange
-        );
-        floodFill(
-          grid,
-          {
-            column: Math.min(gridCoordinate.column + 1, CELLS_PER_AXIS - 1),
-            row: gridCoordinate.row,
-          },
-          colorToChange
-        );
-        floodFill(
-          grid,
-          {
-            column: gridCoordinate.column,
-            row: Math.max(gridCoordinate.row - 1, 0),
-          },
-          colorToChange
-        );
-        floodFill(
-          grid,
-          {
-            column: gridCoordinate.column,
-            row: Math.min(gridCoordinate.row + 1, CELLS_PER_AXIS - 1),
-          },
-          colorToChange
-        );
+        // floodFill(
+        //   grid,
+        //   {
+        //     column: Math.max(gridCoordinate.column - 1, 0),
+        //     row: gridCoordinate.row,
+        //   },
+        //   colorToChange
+        // );
+        // floodFill(
+        //   grid,
+        //   {
+        //     column: Math.min(gridCoordinate.column + 1, CELLS_PER_AXIS - 1),
+        //     row: gridCoordinate.row,
+        //   },
+        //   colorToChange
+        // );
+        // floodFill(
+        //   grid,
+        //   {
+        //     column: gridCoordinate.column,
+        //     row: Math.max(gridCoordinate.row - 1, 0),
+        //   },
+        //   colorToChange
+        // );
+        // floodFill(
+        //   grid,
+        //   {
+        //     column: gridCoordinate.column,
+        //     row: Math.min(gridCoordinate.row + 1, CELLS_PER_AXIS - 1),
+        //   },
+        //   colorToChange
+        // );
       }
       return;
     }
