@@ -115,23 +115,25 @@ let currentPlayer = 'player1';
       const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY );
       const newGrid = grids[grids.length - 1].slice();
 
+      //Push current players color to grid array
       newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column] = PLAYER_COLORS[currentPlayer];
       grids.push(newGrid);
       render(grids[grids.length - 1]);
 
-      playersTurn();
+   
       
     }
 
     let playerIndicator = document.querySelector(".player");
 
+    // Figure out whos turn it us, change to next player for their turn
     function playersTurn(){
       if (currentPlayer === 'player1') {
-        playerIndicator.textContent = "Player Twos's Turn";
-        playerIndicator.style.color = 'green';
-      } else {
-        playerIndicator.textContent = "Player One's Turn" ;
+        playerIndicator.textContent = "Player One's Turn";
         playerIndicator.style.color = 'blue';
+      } else {
+        playerIndicator.textContent = "Player Two's Turn" ;
+        playerIndicator.style.color = 'green';
       }
 
     }
@@ -155,6 +157,8 @@ let currentPlayer = 'player1';
     function gridClickHandler(event) {
       updateGridAt(event.offsetX, event.offsetY);
       currentPlayer = currentPlayer === 'player1' ? 'player2' : 'player1' ;
+
+      playersTurn();
         }
 
     restartButton.addEventListener("mousedown", restartClickHandler);
@@ -187,5 +191,6 @@ let currentPlayer = 'player1';
 
     //Start game
     startGame();
+    playersTurn();
   });
 })();
