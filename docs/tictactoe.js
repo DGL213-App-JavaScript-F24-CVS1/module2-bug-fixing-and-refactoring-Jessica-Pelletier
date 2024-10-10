@@ -12,7 +12,7 @@
     // UI references
     const restartButton = document.querySelector("#restart");
     const undoButton = document.querySelector("#undo");
-    
+
     const colorSelectButtons = document.querySelectorAll(".color-select");
     const playerScoreText = document.querySelector("#score-text");
 
@@ -31,7 +31,7 @@
 
     // Game objects
     let replacementColor = CELL_COLORS.white;
-    let grids; 
+    let grids;
     let playerScore = MAXIMUM_SCORE;
 
     // #endregion
@@ -97,6 +97,25 @@
           CELL_HEIGHT
         );
       }
+
+      //USED CHAT GPT
+      // Draw the black grid lines
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2; // Adjust line width as needed
+      for (let i = 0; i <= CELLS_PER_AXIS; i++) {
+        // Draw vertical lines
+        ctx.beginPath();
+        ctx.moveTo(i * CELL_WIDTH, 0);
+        ctx.lineTo(i * CELL_WIDTH, canvas.height);
+        ctx.stroke();
+
+        // Draw horizontal lines
+        ctx.beginPath();
+        ctx.moveTo(0, i * CELL_HEIGHT);
+        ctx.lineTo(canvas.width, i * CELL_HEIGHT);
+        ctx.stroke();
+      }
+
       playerScoreText.textContent = playerScore;
     }
 
@@ -118,9 +137,6 @@
     function updatePlayerScore() {
       playerScore = playerScore > 0 ? (playerScore -= 1) : 0;
     }
-
-
-
 
     function floodFill(grid, gridCoordinate, colorToChange) {
       if (arraysAreEqual(colorToChange, replacementColor)) {
