@@ -12,7 +12,7 @@
     // UI references
     const restartButton = document.querySelector("#restart");
     const undoButton = document.querySelector("#undo");
-    const rotateButton = document.querySelector("#rotate");
+    
     const colorSelectButtons = document.querySelectorAll(".color-select");
     const playerScoreText = document.querySelector("#score-text");
 
@@ -51,7 +51,7 @@
     function initializeGrid() {
       const newGrid = [];
       for (let i = 0; i < CELLS_PER_AXIS * CELLS_PER_AXIS; i++) {
-        newGrid.push(chooseRandomPropertyFrom(CELL_COLORS));
+        newGrid.push(CELL_COLORS.white);
       }
       return newGrid;
     }
