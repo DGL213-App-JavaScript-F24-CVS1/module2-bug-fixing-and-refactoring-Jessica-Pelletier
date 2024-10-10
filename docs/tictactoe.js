@@ -79,24 +79,7 @@ let currentPlayer = 'player1';
       }
     }
 
-    // function transposeGrid() {
-    //   for (let i = 0; i < grids.length; i++) {
-    //     const currentGrid = grids[i];
-    //     for (let j = 0; j < currentGrid.length; j++) {
-    //       const currentGridRow = Math.floor(j / CELLS_PER_AXIS);
-    //       const currentGridColumn = j % CELLS_PER_AXIS;
-    //       if (currentGridColumn >= currentGridRow) {
-    //         const tempCellStorage = currentGrid[j];
-    //         currentGrid[j] =
-    //           currentGrid[currentGridColumn * CELLS_PER_AXIS + currentGridRow];
-    //         currentGrid[currentGridColumn * CELLS_PER_AXIS + currentGridRow] =
-    //           tempCellStorage;
-    //       }
-    //     }
-    //     grids[i] = currentGrid;
-    //   }
-    //   render(grids[grids.length - 1]);
-    // }
+
 
     function render(grid) {
       for (let i = 0; i < grid.length; i++) {
@@ -134,6 +117,13 @@ let currentPlayer = 'player1';
       const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY );
       const newGrid = grids[grids.length - 1].slice();
 
+      newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column] = PLAYER_COLORS[currentPlayer];
+
+      grids.push(newGrid);
+      render(grids[grids.length - 1]);
+
+
+
       grids.push(newGrid);
       render(grids[grids.length - 1]);
     }
@@ -157,38 +147,7 @@ let currentPlayer = 'player1';
       else {
         grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column] =
           replacementColor;
-        // floodFill(
-        //   grid,
-        //   {
-        //     column: Math.max(gridCoordinate.column - 1, 0),
-        //     row: gridCoordinate.row,
-        //   },
-        //   colorToChange
-        // );
-        // floodFill(
-        //   grid,
-        //   {
-        //     column: Math.min(gridCoordinate.column + 1, CELLS_PER_AXIS - 1),
-        //     row: gridCoordinate.row,
-        //   },
-        //   colorToChange
-        // );
-        // floodFill(
-        //   grid,
-        //   {
-        //     column: gridCoordinate.column,
-        //     row: Math.max(gridCoordinate.row - 1, 0),
-        //   },
-        //   colorToChange
-        // );
-        // floodFill(
-        //   grid,
-        //   {
-        //     column: gridCoordinate.column,
-        //     row: Math.min(gridCoordinate.row + 1, CELLS_PER_AXIS - 1),
-        //   },
-        //   colorToChange
-        // );
+
       }
       return;
     }
@@ -218,10 +177,7 @@ let currentPlayer = 'player1';
       rollBackHistory();
     }
 
-    // rotateButton.addEventListener("mousedown", rotateGrid);
-    // function rotateGrid() {
-    //   transposeGrid();
-    // }
+
 
     colorSelectButtons.forEach((button) => {
       button.addEventListener(
@@ -243,11 +199,6 @@ let currentPlayer = 'player1';
       };
     }
 
-    // To choose a random property from a given object
-    // function chooseRandomPropertyFrom(object) {
-    //   const keys = Object.keys(object);
-    //   return object[keys[Math.floor(keys.length * Math.random())]]; //Truncates to integer
-    // }
 
     // To compare two arrays
     function arraysAreEqual(arr1, arr2) {
